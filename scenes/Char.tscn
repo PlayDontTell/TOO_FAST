@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/Char.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Char.gd" type="Script" id=2]
+[ext_resource path="res://sprites/circle.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=2]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "default_in_the_air"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8 ]
+}
+
+[node name="Char" type="KinematicBody2D"]
+position = Vector2( 83, 155 )
+collision/safe_margin = 0.1
+script = ExtResource( 2 )
+friction = 0.03
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.0627451 )
+position = Vector2( -30, 7 )
+amount = 64
+lifetime = 2.0
+preprocess = 2.0
+local_coords = false
+texture = ExtResource( 3 )
+direction = Vector2( -2, -0.2 )
+spread = 10.0
+gravity = Vector2( 0, -10 )
+initial_velocity = 40.0
+scale_amount = 0.5
+scale_amount_random = 0.5
+color_ramp = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "default"
+anims/default = SubResource( 2 )
+anims/default_in_the_air = SubResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 9, -11, 18, -1, 30, -1, 31, 0, 31, 11, 27, 11, 23, 15, -22, 15, -26, 11, -30, 11, -30, -2, -29, -3, -21, -3, -14, -11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+bus = "Fx"

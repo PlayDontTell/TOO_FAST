@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/3448-blown-away-by-kevin-macleod.ogg-08497e4442f9b9f0256d40d0b88ff058.oggstr"
+
+[deps]
+
+source_file="res://music/3448-blown-away-by-kevin-macleod.ogg"
+dest_files=[ "res://.import/3448-blown-away-by-kevin-macleod.ogg-08497e4442f9b9f0256d40d0b88ff058.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

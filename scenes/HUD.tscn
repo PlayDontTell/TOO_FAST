@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
+[ext_resource path="res://sprites/hud.png" type="Texture" id=2]
+[ext_resource path="res://sprites/font_2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/font.png" type="Texture" id=4]
+[ext_resource path="res://effects/vignette.png" type="Texture" id=5]
+
+[node name="HUD" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Vignette" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.25098 )
+texture = ExtResource( 5 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Progress" type="ColorRect" parent="."]
+margin_left = 1.0
+margin_top = 161.0
+margin_right = 1.0
+margin_bottom = 175.0
+color = Color( 1, 0.74902, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Distance" type="Node2D" parent="."]
+position = Vector2( 187, 184 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Figure_1" type="Sprite" parent="Distance"]
+position = Vector2( -31, 0 )
+texture = ExtResource( 4 )
+hframes = 11
+frame = 9
+
+[node name="Figure_2" type="Sprite" parent="Distance"]
+position = Vector2( -14, 0 )
+texture = ExtResource( 4 )
+hframes = 11
+frame = 9
+
+[node name="Figure_3" type="Sprite" parent="Distance"]
+position = Vector2( -3, 0 )
+texture = ExtResource( 4 )
+hframes = 11
+frame = 9
+
+[node name="Base" type="Sprite" parent="Distance"]
+position = Vector2( -1, 0 )
+texture = ExtResource( 3 )
