@@ -1,215 +1,292 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sprites/cars_sprites.png" type="Texture" id=1]
 [ext_resource path="res://scenes/SlowCars.gd" type="Script" id=2]
 [ext_resource path="res://sprites/circle.png" type="Texture" id=3]
+[ext_resource path="res://sounds/honk1.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/honk6.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/honk2.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/honk3.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/honk9.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/honk4.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/honk8.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/honk7.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/honk5.wav" type="AudioStream" id=12]
+[ext_resource path="res://sounds/hit.ogg" type="AudioStream" id=13]
+[ext_resource path="res://sounds/hit_2.wav" type="AudioStream" id=14]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.288043 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0 )
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 128, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 256, 64, 32 )
-
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 64, 32 )
+region = Rect2( 128, 352, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 32, 64, 32 )
+region = Rect2( 128, 160, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 64, 64, 32 )
+region = Rect2( 128, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 64, 32 )
+region = Rect2( 0, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 96, 64, 32 )
+region = Rect2( 64, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 32, 64, 32 )
+region = Rect2( 128, 96, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 128, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 128, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 288, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 160, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 160, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 64, 32 )
+region = Rect2( 128, 320, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=31]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 256, 64, 32 )
+region = Rect2( 128, 384, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=32]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 224, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 160, 64, 32 )
+region = Rect2( 128, 128, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 96, 64, 32 )
+region = Rect2( 128, 288, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 224, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 224, 64, 32 )
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 192, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 64, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 192, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 96, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 128, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 128, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 32, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 352, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 352, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 224, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 384, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 288, 64, 32 )
+
 [sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 288, 64, 32 )
+region = Rect2( 64, 288, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 320, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 320, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=38]
 animations = [ {
-"frames": [ SubResource( 14 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "car_4_crash",
+"name": "car_11_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 27 ) ],
-"loop": true,
-"name": "car_8_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "car_1_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ) ],
-"loop": false,
-"name": "car_2_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "car_2_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "car_3_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 7 ) ],
-"loop": false,
-"name": "car_1_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "car_4_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ) ],
-"loop": true,
-"name": "car_6_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "car_9_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 21 ) ],
-"loop": true,
-"name": "car_6_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 22 ), SubResource( 23 ) ],
-"loop": true,
-"name": "car_5_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 30 ), SubResource( 31 ) ],
-"loop": true,
-"name": "car_8_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 32 ) ],
-"loop": true,
-"name": "car_7_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 24 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "car_5_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ) ],
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "car_8_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "car_8_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "car_3_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "car_5_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ) ],
+"loop": true,
+"name": "car_10_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "car_12_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ) ],
+"loop": true,
+"name": "car_4_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "car_9_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "car_7_default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 35 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
-"name": "car_9_crash",
+"name": "car_6_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": false,
+"name": "car_2_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ) ],
+"loop": true,
+"name": "car_6_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "car_3_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "car_4_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ) ],
+"loop": false,
+"name": "car_1_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "car_11_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "car_2_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 29 ) ],
+"loop": true,
+"name": "car_7_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "car_12_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "car_1_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "car_9_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ) ],
+"loop": true,
+"name": "car_10_default",
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=39]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -232,10 +309,91 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -29, -12, 15, -12, 22, 1, 27, 1, 28, 2, 28, 12, -29, 12 ) ]
+"values": [ PoolVector2Array( -28, -12, 15, -12, 22, 1, 27, 1, 28, 12, -29, 12 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=40]
+resource_name = "car_10"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "car_10_default" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 18, 1, 28, 1, 30, 12, -31, 12, -29, -4, -6, -4, -6, -8, 9, -8 ) ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "car_11"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "car_11_default" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 18, 1, 28, 1, 30, 12, -31, 12, -29, -4, -6, -4, -6, -8, 9, -8 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "car_12"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "car_12_default" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 18, 1, 28, 1, 30, 12, -31, 12, -29, -4, -6, -4, -6, -8, 9, -8 ) ]
+}
+
+[sub_resource type="Animation" id=43]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -258,11 +416,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -29, -12, 15, -12, 22, 1, 27, 1, 28, 2, 28, 12, -29, 12 ) ]
+"values": [ PoolVector2Array( -28, -12, 15, -12, 22, 1, 27, 1, 28, 12, -29, 12 ) ]
 }
 
-[sub_resource type="Animation" id=17]
-resource_name = "car_3"
+[sub_resource type="Animation" id=44]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -285,11 +442,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -29, -12, 15, -12, 22, 1, 27, 1, 28, 2, 28, 12, -29, 12 ) ]
+"values": [ PoolVector2Array( -28, -12, 15, -12, 22, 1, 27, 1, 28, 12, -29, 12 ) ]
 }
 
-[sub_resource type="Animation" id=18]
-resource_name = "car_4"
+[sub_resource type="Animation" id=45]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -312,11 +468,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 2, 30, 12, -31, 12, -31, 1, -30, 0, -20, 0 ) ]
+"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 12, -31, 12, -30, 0, -20, 0 ) ]
 }
 
-[sub_resource type="Animation" id=25]
-resource_name = "car_5"
+[sub_resource type="Animation" id=46]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -339,11 +494,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 2, 30, 12, -31, 12, -31, 1, -30, 0, -20, 0 ) ]
+"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 12, -31, 12, -30, 0, -20, 0 ) ]
 }
 
-[sub_resource type="Animation" id=26]
-resource_name = "car_6"
+[sub_resource type="Animation" id=47]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -366,11 +520,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 2, 30, 12, -31, 12, -31, 1, -30, 0, -20, 0 ) ]
+"values": [ PoolVector2Array( -15, -10, 8, -10, 18, 0, 28, 0, 30, 12, -31, 12, -30, 0, -20, 0 ) ]
 }
 
-[sub_resource type="Animation" id=39]
-resource_name = "car_7"
+[sub_resource type="Animation" id=48]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -393,11 +546,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( 19, 0, 27, 2, 27, 12, -29, 12, -29, 2, -24, 0 ) ]
+"values": [ PoolVector2Array( 19, 0, 26, 2, 27, 12, -29, 12, -28, 2, -24, 0 ) ]
 }
 
-[sub_resource type="Animation" id=40]
-resource_name = "car_8"
+[sub_resource type="Animation" id=49]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -420,11 +572,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( 19, 0, 27, 2, 27, 12, -29, 12, -29, 2, -24, 0 ) ]
+"values": [ PoolVector2Array( 19, 0, 26, 2, 27, 12, -29, 12, -28, 2, -24, 0 ) ]
 }
 
-[sub_resource type="Animation" id=38]
-resource_name = "car_9"
+[sub_resource type="Animation" id=50]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -447,11 +598,14 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ PoolVector2Array( 19, 0, 27, 2, 27, 12, -29, 12, -29, 2, -24, 0 ) ]
+"values": [ PoolVector2Array( 19, 0, 26, 2, 27, 12, -29, 12, -28, 2, -24, 0 ) ]
 }
 
 [node name="SlowCars" type="RigidBody2D"]
 mode = 1
+gravity_scale = 4.0
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="Smoke" type="CPUParticles2D" parent="."]
@@ -472,27 +626,94 @@ __meta__ = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 19, 0, 27, 2, 27, 12, -29, 12, -29, 2, -24, 0 )
+polygon = PoolVector2Array( -28, -12, 15, -12, 22, 1, 27, 1, 28, 12, -29, 12 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 8 )
-animation = "car_7_default"
-frame = 1
+frames = SubResource( 38 )
+animation = "car_1_default"
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/car_1 = SubResource( 9 )
-anims/car_2 = SubResource( 10 )
-anims/car_3 = SubResource( 17 )
-anims/car_4 = SubResource( 18 )
-anims/car_5 = SubResource( 25 )
-anims/car_6 = SubResource( 26 )
-anims/car_7 = SubResource( 39 )
-anims/car_8 = SubResource( 40 )
-anims/car_9 = SubResource( 38 )
+anims/car_1 = SubResource( 39 )
+anims/car_10 = SubResource( 40 )
+anims/car_11 = SubResource( 41 )
+anims/car_12 = SubResource( 42 )
+anims/car_2 = SubResource( 43 )
+anims/car_3 = SubResource( 44 )
+anims/car_4 = SubResource( 45 )
+anims/car_5 = SubResource( 46 )
+anims/car_6 = SubResource( 47 )
+anims/car_7 = SubResource( 48 )
+anims/car_8 = SubResource( 49 )
+anims/car_9 = SubResource( 50 )
+
+[node name="Honks" type="Node2D" parent="."]
+
+[node name="honk_1" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 4 )
+volume_db = -18.0
+bus = "Fx"
+
+[node name="honk_2" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 6 )
+volume_db = -14.0
+bus = "Fx"
+
+[node name="honk_3" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 7 )
+volume_db = -12.0
+bus = "Fx"
+
+[node name="honk_4" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 9 )
+volume_db = -20.0
+bus = "Fx"
+
+[node name="honk_5" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 12 )
+volume_db = -24.0
+bus = "Fx"
+
+[node name="honk_6" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 5 )
+volume_db = -22.0
+bus = "Fx"
+
+[node name="honk_7" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 11 )
+volume_db = -6.0
+bus = "Fx"
+
+[node name="honk_8" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 10 )
+volume_db = -16.0
+bus = "Fx"
+
+[node name="honk_9" type="AudioStreamPlayer" parent="Honks"]
+stream = ExtResource( 8 )
+volume_db = -14.0
+bus = "Fx"
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"slow_car",
+]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Fx"
+
+[node name="Destroy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -8.0
+bus = "Fx"
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

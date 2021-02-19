@@ -41,3 +41,4 @@ bus = "Fx"
 [node name="Engine" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -60.0
+bus = "Fx"

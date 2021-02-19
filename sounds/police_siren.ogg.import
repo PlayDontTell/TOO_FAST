@@ -11,5 +11,5 @@ dest_files=[ "res://.import/police_siren.ogg-16b53798910937228ed4309fee7f183b.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -1,21 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
+[ext_resource path="res://sounds/firework.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/hud.png" type="Texture" id=2]
 [ext_resource path="res://sprites/font_2.png" type="Texture" id=3]
 [ext_resource path="res://sprites/font.png" type="Texture" id=4]
-[ext_resource path="res://effects/vignette.png" type="Texture" id=5]
+[ext_resource path="res://sprites/COMBO.png" type="Texture" id=5]
+[ext_resource path="res://effects/star.png" type="Texture" id=6]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sounds/coin.wav" type="AudioStream" id=8]
+[ext_resource path="res://sprites/font2.png" type="Texture" id=9]
+[ext_resource path="res://sprites/font2_2.png" type="Texture" id=10]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.370192 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="HUD" type="Node2D"]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Vignette" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.25098 )
-texture = ExtResource( 5 )
-centered = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -34,33 +34,157 @@ margin_right = 1.0
 margin_bottom = 175.0
 color = Color( 1, 0.74902, 0, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="comboParticles_1" type="CPUParticles2D" parent="."]
+position = Vector2( 236, 11 )
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 6 )
+direction = Vector2( 1, -0.2 )
+spread = 20.0
+gravity = Vector2( 0, 200 )
+initial_velocity = 206.61
+initial_velocity_random = 0.64
+angular_velocity = 583.14
+angular_velocity_random = 1.0
+linear_accel = -100.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 1 )
+hue_variation = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="comboParticles_2" type="CPUParticles2D" parent="."]
+position = Vector2( 171, 12 )
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 6 )
+direction = Vector2( -1, -0.2 )
+spread = 20.0
+gravity = Vector2( 0, 200 )
+initial_velocity = 206.61
+initial_velocity_random = 0.64
+angular_velocity = 583.14
+angular_velocity_random = 1.0
+linear_accel = -100.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 1 )
+hue_variation = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_editor_description_": ""
+}
+
+[node name="Combo" type="Sprite" parent="."]
+position = Vector2( 180, 11 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ComboFigure1" type="Sprite" parent="Combo"]
+position = Vector2( 63, -1 )
+texture = ExtResource( 4 )
+hframes = 11
+frame = 9
+
+[node name="ComboFigure2" type="Sprite" parent="Combo"]
+position = Vector2( 75, -1 )
+texture = ExtResource( 4 )
+hframes = 11
+frame = 9
 
 [node name="Distance" type="Node2D" parent="."]
 position = Vector2( 187, 184 )
 __meta__ = {
-"_edit_group_": true
+"_edit_lock_": true
 }
 
+[node name="Base" type="Sprite" parent="Distance"]
+position = Vector2( -5, 1 )
+texture = ExtResource( 3 )
+
 [node name="Figure_1" type="Sprite" parent="Distance"]
-position = Vector2( -31, 0 )
+position = Vector2( -33, 0 )
 texture = ExtResource( 4 )
 hframes = 11
 frame = 9
 
 [node name="Figure_2" type="Sprite" parent="Distance"]
-position = Vector2( -14, 0 )
+position = Vector2( -16, 0 )
 texture = ExtResource( 4 )
 hframes = 11
 frame = 9
 
 [node name="Figure_3" type="Sprite" parent="Distance"]
-position = Vector2( -3, 0 )
+position = Vector2( -4, 0 )
 texture = ExtResource( 4 )
 hframes = 11
 frame = 9
 
-[node name="Base" type="Sprite" parent="Distance"]
-position = Vector2( -1, 0 )
-texture = ExtResource( 3 )
+[node name="Score" type="Node2D" parent="."]
+visible = false
+position = Vector2( 178, 202 )
+
+[node name="Figure_1" type="Sprite" parent="Score"]
+position = Vector2( -37, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Figure_2" type="Sprite" parent="Score"]
+position = Vector2( -28, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Figure_3" type="Sprite" parent="Score"]
+position = Vector2( -19, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Figure_4" type="Sprite" parent="Score"]
+position = Vector2( -10, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Figure_5" type="Sprite" parent="Score"]
+position = Vector2( -1, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Figure_6" type="Sprite" parent="Score"]
+position = Vector2( 8, -1 )
+texture = ExtResource( 9 )
+hframes = 11
+frame = 9
+
+[node name="Base" type="Sprite" parent="Score"]
+position = Vector2( 25, 0 )
+texture = ExtResource( 10 )
+
+[node name="UI" parent="." instance=ExtResource( 7 )]
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -4.0
+bus = "Fx"
+
+[node name="Firework" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Fx"

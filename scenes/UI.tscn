@@ -1,0 +1,186 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://scenes/Cross.gd" type="Script" id=1]
+[ext_resource path="res://sprites/cross.png" type="Texture" id=2]
+[ext_resource path="res://sprites/sound.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cadre.png" type="Texture" id=4]
+[ext_resource path="res://effects/vignette.png" type="Texture" id=5]
+[ext_resource path="res://sprites/menu_background.png" type="Texture" id=6]
+[ext_resource path="res://sprites/font.png" type="Texture" id=7]
+[ext_resource path="res://sprites/cursors.png" type="Texture" id=8]
+[ext_resource path="res://scenes/UI.gd" type="Script" id=9]
+[ext_resource path="res://sprites/credits.png" type="Texture" id=10]
+[ext_resource path="res://sounds/Bop_4.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/Bop_5.wav" type="AudioStream" id=12]
+[ext_resource path="res://sounds/Bop_1.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/Bop_3.wav" type="AudioStream" id=14]
+[ext_resource path="res://sounds/Bop_7.wav" type="AudioStream" id=15]
+[ext_resource path="res://sounds/Bop_2.wav" type="AudioStream" id=16]
+[ext_resource path="res://sounds/Bop_6.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/Bop_8.wav" type="AudioStream" id=18]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://effects/Grandstander/Grandstander-SemiBold.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_top = -5
+extra_spacing_char = -1
+extra_spacing_space = 1
+font_data = SubResource( 1 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "pressed",
+"speed": 5.0
+} ]
+
+[node name="UI" type="Node2D"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( -16, 0 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Vignette" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.25098 )
+texture = ExtResource( 5 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="font" type="Sprite" parent="."]
+position = Vector2( 565, -4 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 429.0
+margin_top = 24.0
+margin_right = 670.0
+margin_bottom = 170.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "pts
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cadre" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Sound" type="Sprite" parent="."]
+position = Vector2( 364, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cross" type="TextureButton" parent="."]
+margin_left = 348.0
+margin_top = 1.0
+margin_right = 364.0
+margin_bottom = 18.0
+rect_pivot_offset = Vector2( 11, 9 )
+toggle_mode = true
+texture_pressed = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+output = "music"
+
+[node name="Cross2" type="TextureButton" parent="."]
+margin_left = 366.0
+margin_right = 382.0
+margin_bottom = 17.0
+rect_pivot_offset = Vector2( 11, 9 )
+toggle_mode = true
+texture_pressed = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+output = "fx"
+
+[node name="Credits" type="TextureButton" parent="."]
+visible = false
+margin_left = 121.0
+margin_top = 62.0
+margin_right = 361.0
+margin_bottom = 207.0
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cursor" type="AnimatedSprite" parent="."]
+frames = SubResource( 5 )
+animation = "pressed"
+
+[node name="Bopsounds" type="Node2D" parent="Cursor"]
+
+[node name="Bop_1" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 13 )
+bus = "Fx"
+
+[node name="Bop_2" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 16 )
+bus = "Fx"
+
+[node name="Bop_3" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 14 )
+bus = "Fx"
+
+[node name="Bop_4" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 11 )
+bus = "Fx"
+
+[node name="Bop_5" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 12 )
+bus = "Fx"
+
+[node name="Bop_6" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 17 )
+bus = "Fx"
+
+[node name="Bop_7" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 15 )
+bus = "Fx"
+
+[node name="Bop_8" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+stream = ExtResource( 18 )
+bus = "Fx"
+[connection signal="pressed" from="Cross" to="Cross" method="_on_Cross_pressed"]
+[connection signal="pressed" from="Cross2" to="Cross2" method="_on_Cross_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

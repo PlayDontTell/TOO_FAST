@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Bop_3.wav-28c4b70df92c2baec381cb0e0deedbf3.sample"
+
+[deps]
+
+source_file="res://sounds/Bop_3.wav"
+dest_files=[ "res://.import/Bop_3.wav-28c4b70df92c2baec381cb0e0deedbf3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

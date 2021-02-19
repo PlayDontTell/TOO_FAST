@@ -15,7 +15,7 @@ func _ready():
 func load_scene(scene):
 	
 	if scene == level:
-		$Ressources/Music_2.play()
+		play_menu_music()
 	
 	# Load the next room and the ui node.
 	var next_scene = ResourceLoader.load(scene)
@@ -32,3 +32,17 @@ func load_scene(scene):
 				i.queue_free()
 	
 	add_child(current_scene)
+
+
+func play_menu_music():
+	if $Ressources/Music_2.playing:
+		$Ressources/Tween.interpolate_property($Ressources/Music_2, "volume_db",  $Ressources/Music_2.volume_db, -60, 3)
+		$Ressources/Tween.start()
+	$Ressources/Music_1.play()
+
+
+func play_level_music():
+	if $Ressources/Music_1.playing:
+		$Ressources/Tween.interpolate_property($Ressources/Music_1, "volume_db", $Ressources/Music_1.volume_db, -60, 3)
+		$Ressources/Tween.start()
+	$Ressources/Music_2.play()
