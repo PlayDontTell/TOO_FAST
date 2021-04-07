@@ -63,11 +63,15 @@ func hit_by_police():
 	yield(get_tree().create_timer(0.4), "timeout")
 	z_index = -1
 	yield(get_tree().create_timer(1.5), "timeout")
-	level.game_manager.load_scene(level.game_manager.level)
+	level.setup_restart()
 
 
 func disable_collisions():
 	$CollisionPolygon2D.disabled = true
+	
+	
+func enable_collisions():
+	$CollisionPolygon2D.disabled = false
 
 
 func _on_HitBox_area_entered(area):

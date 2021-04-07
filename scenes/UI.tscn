@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/Cross.gd" type="Script" id=1]
 [ext_resource path="res://sprites/cross.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/cadre.png" type="Texture" id=4]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=5]
 [ext_resource path="res://sprites/menu_background.png" type="Texture" id=6]
-[ext_resource path="res://sprites/font.png" type="Texture" id=7]
+[ext_resource path="res://scenes/LevelSquare.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprites/cursors.png" type="Texture" id=8]
 [ext_resource path="res://scenes/UI.gd" type="Script" id=9]
 [ext_resource path="res://sprites/credits.png" type="Texture" id=10]
@@ -18,17 +18,29 @@
 [ext_resource path="res://sounds/Bop_2.wav" type="AudioStream" id=16]
 [ext_resource path="res://sounds/Bop_6.wav" type="AudioStream" id=17]
 [ext_resource path="res://sounds/Bop_8.wav" type="AudioStream" id=18]
+[ext_resource path="res://sprites/play_hover.png" type="Texture" id=19]
+[ext_resource path="res://sprites/options_default.png" type="Texture" id=20]
+[ext_resource path="res://sprites/play_default.png" type="Texture" id=21]
+[ext_resource path="res://sprites/options_hover.png" type="Texture" id=22]
+[ext_resource path="res://sprites/credits_default.png" type="Texture" id=23]
+[ext_resource path="res://sprites/credits_hover.png" type="Texture" id=24]
+[ext_resource path="res://sprites/quit_default.png" type="Texture" id=25]
+[ext_resource path="res://sprites/quit_hover.png" type="Texture" id=26]
+[ext_resource path="res://sprites/back_hover.png" type="Texture" id=27]
+[ext_resource path="res://sprites/back_default.png" type="Texture" id=28]
+[ext_resource path="res://sprites/square2_hover.png" type="Texture" id=29]
+[ext_resource path="res://sprites/square2_default.png" type="Texture" id=30]
+[ext_resource path="res://sprites/levels_label.png" type="Texture" id=32]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://effects/Grandstander/Grandstander-SemiBold.ttf"
+font_path = "res://effects/Grandstander/Grandstander-SemiBoldItalic.ttf"
 
 [sub_resource type="DynamicFont" id=2]
+size = 18
 outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-extra_spacing_top = -5
-extra_spacing_char = -1
-extra_spacing_space = 1
+extra_spacing_top = 4
+extra_spacing_space = 2
 font_data = SubResource( 1 )
 
 [sub_resource type="AtlasTexture" id=3]
@@ -53,15 +65,140 @@ animations = [ {
 } ]
 
 [node name="UI" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Background" type="Sprite" parent="."]
+[node name="GlobalMenus" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite" parent="GlobalMenus"]
 position = Vector2( -16, 0 )
 texture = ExtResource( 6 )
 centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Credits" type="TextureButton" parent="GlobalMenus"]
+visible = false
+margin_left = 121.0
+margin_top = 62.0
+margin_right = 361.0
+margin_bottom = 207.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Node2D" parent="GlobalMenus"]
+visible = false
+position = Vector2( 17, 16 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Play" type="TextureButton" parent="GlobalMenus/Menu"]
+margin_left = 177.0
+margin_top = 82.0
+margin_right = 262.0
+margin_bottom = 98.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 21 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="TextureButton" parent="GlobalMenus/Menu"]
+visible = false
+margin_left = 177.0
+margin_top = 110.0
+margin_right = 262.0
+margin_bottom = 126.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 20 )
+texture_hover = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsLink" type="TextureButton" parent="GlobalMenus/Menu"]
+margin_left = 177.0
+margin_top = 110.0
+margin_right = 262.0
+margin_bottom = 126.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 23 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="GlobalMenus/Menu"]
+margin_left = 177.0
+margin_top = 138.0
+margin_right = 262.0
+margin_bottom = 154.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 25 )
+texture_hover = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Levels" type="Node2D" parent="GlobalMenus"]
+
+[node name="LevelsBack" type="TextureButton" parent="GlobalMenus/Levels"]
+margin_left = 212.0
+margin_top = 193.0
+margin_right = 269.0
+margin_bottom = 209.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 28 )
+texture_hover = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Squares" type="Node2D" parent="GlobalMenus/Levels"]
+
+[node name="LevelSquare" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+
+[node name="LevelSquare2" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+margin_left = 186.0
+margin_right = 234.0
+level_id = 1
+
+[node name="LevelSquare3" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+margin_left = 238.0
+margin_right = 286.0
+level_id = 2
+
+[node name="LevelSquare4" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+margin_left = 290.0
+margin_right = 338.0
+level_id = 3
+
+[node name="LevelSquare5" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+margin_top = 139.0
+margin_bottom = 187.0
+texture_normal = ExtResource( 30 )
+texture_hover = ExtResource( 29 )
+level_id = 4
+
+[node name="Label" type="Sprite" parent="GlobalMenus/Levels"]
+position = Vector2( 241, 76 )
+texture = ExtResource( 32 )
 
 [node name="Vignette" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -71,23 +208,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="font" type="Sprite" parent="."]
-position = Vector2( 565, -4 )
-texture = ExtResource( 7 )
-
 [node name="Label" type="Label" parent="."]
-margin_left = 429.0
-margin_top = 24.0
-margin_right = 670.0
-margin_bottom = 170.0
+margin_left = 458.0
+margin_top = 157.0
+margin_right = 699.0
+margin_bottom = 303.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
-text = "pts
-"
+text = "arcade"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -98,19 +230,21 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="Sound" type="Sprite" parent="."]
-position = Vector2( 364, 10 )
+position = Vector2( 362, 12 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Cross" type="TextureButton" parent="."]
-margin_left = 348.0
-margin_top = 1.0
-margin_right = 364.0
-margin_bottom = 18.0
+margin_left = 346.0
+margin_top = 3.0
+margin_right = 362.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 11, 9 )
+focus_mode = 0
 toggle_mode = true
+enabled_focus_mode = 0
 texture_pressed = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -120,11 +254,14 @@ __meta__ = {
 output = "music"
 
 [node name="Cross2" type="TextureButton" parent="."]
-margin_left = 366.0
-margin_right = 382.0
-margin_bottom = 17.0
+margin_left = 364.0
+margin_top = 2.0
+margin_right = 380.0
+margin_bottom = 19.0
 rect_pivot_offset = Vector2( 11, 9 )
+focus_mode = 0
 toggle_mode = true
+enabled_focus_mode = 0
 texture_pressed = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -132,17 +269,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 output = "fx"
-
-[node name="Credits" type="TextureButton" parent="."]
-visible = false
-margin_left = 121.0
-margin_top = 62.0
-margin_right = 361.0
-margin_bottom = 207.0
-texture_normal = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Cursor" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
@@ -181,6 +307,13 @@ bus = "Fx"
 [node name="Bop_8" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
 stream = ExtResource( 18 )
 bus = "Fx"
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="pressed" from="GlobalMenus/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="GlobalMenus/Menu/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="GlobalMenus/Menu/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="GlobalMenus/Menu/CreditsLink" to="." method="_on_CreditsLink_pressed"]
+[connection signal="pressed" from="GlobalMenus/Menu/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="GlobalMenus/Levels/LevelsBack" to="." method="_on_LevelsBack_pressed"]
 [connection signal="pressed" from="Cross" to="Cross" method="_on_Cross_pressed"]
 [connection signal="pressed" from="Cross2" to="Cross2" method="_on_Cross_pressed"]
-[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

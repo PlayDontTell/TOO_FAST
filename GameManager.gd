@@ -6,6 +6,7 @@ var level = "res://scenes/Level.tscn"
 
 
 func _ready():
+	Global.load_game()
 	if Global.DEV_MODE:
 		load_scene(level)
 	else:
@@ -15,7 +16,10 @@ func _ready():
 func load_scene(scene):
 	
 	if scene == level:
-		play_menu_music()
+		if Global.player_in_game:
+			play_level_music()
+		else:
+			play_menu_music()
 	
 	# Load the next room and the ui node.
 	var next_scene = ResourceLoader.load(scene)
@@ -35,14 +39,18 @@ func load_scene(scene):
 
 
 func play_menu_music():
-	if $Ressources/Music_2.playing:
-		$Ressources/Tween.interpolate_property($Ressources/Music_2, "volume_db",  $Ressources/Music_2.volume_db, -60, 3)
-		$Ressources/Tween.start()
+	$Ressources/Music_2.volume_db = -60
+	$Ressources/Music_1.volume_db = -8
 	$Ressources/Music_1.play()
+	$Ressources/Music_2.stop()
 
 
 func play_level_music():
-	if $Ressources/Music_1.playing:
-		$Ressources/Tween.interpolate_property($Ressources/Music_1, "volume_db", $Ressources/Music_1.volume_db, -60, 3)
+	if not Global.fx_muted:
+		$Ressources/Tween.interpolate_method(Global, "set_fx_volume", AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Fx")), 0, 1)
 		$Ressources/Tween.start()
-	$Ressources/Music_2.play()
+	$Ressources/Music_1.volume_db = -60
+	$Ressources/Music_2.volume_db = -8
+	if not $Ressources/Music_2.playing:
+		$Ressources/Music_2.play()
+	

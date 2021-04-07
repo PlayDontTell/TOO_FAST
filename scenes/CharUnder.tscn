@@ -36,9 +36,9 @@ color = Color( 1, 1, 1, 0.392157 )
 [node name="TireSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -60.0
-bus = "Fx"
+bus = "Level_Fx"
 
 [node name="Engine" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -60.0
-bus = "Fx"
+bus = "Level_Fx"

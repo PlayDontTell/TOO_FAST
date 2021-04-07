@@ -70,4 +70,4 @@ frame = 9
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -8.0
-bus = "Fx"
+bus = "Level_Fx"

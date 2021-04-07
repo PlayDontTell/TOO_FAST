@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://sounds/firework.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/hud.png" type="Texture" id=2]
@@ -10,12 +10,26 @@
 [ext_resource path="res://sounds/coin.wav" type="AudioStream" id=8]
 [ext_resource path="res://sprites/font2.png" type="Texture" id=9]
 [ext_resource path="res://sprites/font2_2.png" type="Texture" id=10]
+[ext_resource path="res://sprites/pause_default.png" type="Texture" id=11]
+[ext_resource path="res://sprites/pause_hover.png" type="Texture" id=12]
+[ext_resource path="res://scenes/HUD.gd" type="Script" id=13]
+[ext_resource path="res://effects/black.png" type="Texture" id=14]
+[ext_resource path="res://sprites/resume_default.png" type="Texture" id=15]
+[ext_resource path="res://sprites/menu_default.png" type="Texture" id=16]
+[ext_resource path="res://sprites/menu_hovert.png" type="Texture" id=17]
+[ext_resource path="res://sprites/resume_hover.png" type="Texture" id=18]
+[ext_resource path="res://scenes/PauseBackground.gd" type="Script" id=19]
+[ext_resource path="res://sprites/font_bold_base.png" type="Texture" id=20]
+[ext_resource path="res://sprites/font_bold.png" type="Texture" id=21]
+[ext_resource path="res://sprites/MAX.png" type="Texture" id=22]
+[ext_resource path="res://sprites/marks.png" type="Texture" id=23]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.370192 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="HUD" type="Node2D"]
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -29,14 +43,18 @@ __meta__ = {
 
 [node name="Progress" type="ColorRect" parent="."]
 margin_left = 1.0
-margin_top = 161.0
+margin_top = 162.0
 margin_right = 1.0
-margin_bottom = 175.0
+margin_bottom = 174.0
 color = Color( 1, 0.74902, 0, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Marks" type="Sprite" parent="."]
+texture = ExtResource( 23 )
+centered = false
 
 [node name="comboParticles_1" type="CPUParticles2D" parent="."]
 position = Vector2( 236, 11 )
@@ -105,6 +123,10 @@ position = Vector2( 75, -1 )
 texture = ExtResource( 4 )
 hframes = 11
 frame = 9
+
+[node name="ComboMAX" type="Sprite" parent="."]
+position = Vector2( 235, 11 )
+texture = ExtResource( 22 )
 
 [node name="Distance" type="Node2D" parent="."]
 position = Vector2( 187, 184 )
@@ -178,13 +200,123 @@ frame = 9
 position = Vector2( 25, 0 )
 texture = ExtResource( 10 )
 
+[node name="RetryBase" type="Sprite" parent="."]
+position = Vector2( 192, 61 )
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Distance2" type="Node2D" parent="RetryBase"]
+position = Vector2( -5, 39 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Figure_1" type="Sprite" parent="RetryBase/Distance2"]
+position = Vector2( -34, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="Figure_2" type="Sprite" parent="RetryBase/Distance2"]
+position = Vector2( -16, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="Figure_3" type="Sprite" parent="RetryBase/Distance2"]
+position = Vector2( -2, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="Distance3" type="Node2D" parent="RetryBase"]
+position = Vector2( -6, -35 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Figure_1" type="Sprite" parent="RetryBase/Distance3"]
+position = Vector2( -34, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="Figure_2" type="Sprite" parent="RetryBase/Distance3"]
+position = Vector2( -16, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="Figure_3" type="Sprite" parent="RetryBase/Distance3"]
+position = Vector2( -2, 0 )
+texture = ExtResource( 21 )
+hframes = 11
+frame = 9
+
+[node name="PauseBackground" type="Sprite" parent="."]
+pause_mode = 2
+visible = false
+self_modulate = Color( 1, 1, 1, 0.501961 )
+texture = ExtResource( 14 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 384, 216 )
+script = ExtResource( 19 )
+
+[node name="Resume" type="TextureButton" parent="PauseBackground"]
+margin_left = 152.0
+margin_top = 79.0
+margin_right = 232.0
+margin_bottom = 100.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 15 )
+texture_hover = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuInGame" type="TextureButton" parent="PauseBackground"]
+margin_left = 152.0
+margin_top = 111.0
+margin_right = 232.0
+margin_bottom = 132.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 16 )
+texture_hover = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseButton" type="TextureButton" parent="."]
+pause_mode = 2
+margin_left = -5.0
+margin_top = 2.0
+margin_right = 77.0
+margin_bottom = 25.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+texture_normal = ExtResource( 11 )
+texture_hover = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="UI" parent="." instance=ExtResource( 7 )]
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -4.0
+volume_db = -6.0
 bus = "Fx"
 
 [node name="Firework" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 bus = "Fx"
+[connection signal="pressed" from="PauseBackground/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PauseBackground/MenuInGame" to="." method="_on_MenuInGame_pressed"]
+[connection signal="toggled" from="PauseButton" to="." method="_on_PauseButton_toggled"]

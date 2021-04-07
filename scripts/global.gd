@@ -2,9 +2,11 @@ extends Node
 
 
 # Meta variables
-const DEV_MODE: bool = true
+const DEV_MODE: bool = not true
 var count_test: int = 0
 var language: String = "eng"
+var game_just_started: bool = false
+var achieved_level_quantity: int = 0 # From 0 to 7
 
 # UI variables
 var logo_visible: bool = false
@@ -13,6 +15,9 @@ var force_menu_cursor: bool = false
 var mouse_hovering_count: int = 0
 var fx_muted: bool = false
 var music_muted: bool = false
+var is_quit_button_displayed: bool = true
+var last_level_played: int = 0
+var player_in_game: bool = false
 
 # Colors
 const COLOR_DEFAULT = Color(1, 1, 1, 1)
@@ -61,3 +66,23 @@ func set_fx_volume(value):
 
 func set_music_volume(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
+
+
+func set_level_fx_volume(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Level_Fx"), value)
+
+
+func save_game():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.WRITE)
+	save_game.store_line(str(achieved_level_quantity))
+	save_game.close()
+
+
+func load_game():
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		return
+	save_game.open("user://savegame.save", File.READ)
+	achieved_level_quantity = int(save_game.get_line())
+	save_game.close()

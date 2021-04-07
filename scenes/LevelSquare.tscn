@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/LevelSquare.gd" type="Script" id=1]
+[ext_resource path="res://sprites/square_hover.png" type="Texture" id=2]
+[ext_resource path="res://sprites/square_default.png" type="Texture" id=3]
+[ext_resource path="res://sprites/fontblack.png" type="Texture" id=4]
+[ext_resource path="res://sprites/square_backgrounds.png" type="Texture" id=5]
+[ext_resource path="res://sprites/square_sky.png" type="Texture" id=6]
+
+[node name="LevelSquare" type="TextureButton"]
+margin_left = 134.0
+margin_top = 87.0
+margin_right = 182.0
+margin_bottom = 135.0
+rect_pivot_offset = Vector2( 32, 20 )
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Set" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="sky" type="Sprite" parent="Set"]
+visible = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="background" type="Sprite" parent="Set"]
+visible = false
+texture = ExtResource( 5 )
+centered = false
+vframes = 4
+hframes = 2
+
+[node name="font" type="Sprite" parent="Set"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 4 )
+hframes = 11
+[connection signal="mouse_entered" from="." to="." method="_on_LevelSquare_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_LevelSquare_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_LevelSquare_pressed"]
