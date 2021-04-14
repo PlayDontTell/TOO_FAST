@@ -30,7 +30,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		$Cursor.play("pressed")
-		get_node("Cursor/Bopsounds/Bop_" + str(randi()% 8 + 1)).play()
+		$Cursor/CursorSound.play()
 	else:
 		$Cursor.play("default")
 
@@ -60,8 +60,14 @@ func _on_CreditsLink_pressed():
 	$GlobalMenus/Credits.visible = true
 
 
+func _on_HowToLink_pressed():
+	reset_menu()
+	$GlobalMenus/HowToPlay.visible = true
+
+
 func reset_menu():
 	$GlobalMenus/Credits.visible = false
+	$GlobalMenus/HowToPlay.visible = false
 	$GlobalMenus/Menu.visible = false
 	$GlobalMenus/Levels.visible = false
 
@@ -92,3 +98,24 @@ func slide_menu_in():
 	game_manager.play_menu_music()
 	$Tween.interpolate_property($GlobalMenus, "position", Vector2(400, 0), Vector2(0, 0), 1.4, Tween.TRANS_CUBIC)
 	$Tween.start()
+
+
+# warning-ignore:unused_argument
+func _on_MirrorButton_toggled(button_pressed):
+	if Global.is_game_mirrored:
+		$GlobalMenus/Levels/Squares/MirrorButton/MirrorButtonSprite.frame = 0
+		Global.is_game_mirrored = false
+		for i in $GlobalMenus/Levels/Squares.get_children():
+			i.initialize_state()
+			if i.has_node("Set/font"):
+				i.get_node("Set/font").flip_h = false
+	else:
+		$GlobalMenus/Levels/Squares/MirrorButton/MirrorButtonSprite.frame = 1
+		Global.is_game_mirrored = true
+		for i in $GlobalMenus/Levels/Squares.get_children():
+			i.initialize_state()
+			if i.has_node("Set/font"):
+				i.get_node("Set/font").flip_h = true
+
+
+

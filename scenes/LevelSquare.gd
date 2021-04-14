@@ -26,4 +26,12 @@ func _on_LevelSquare_mouse_exited():
 
 
 func initialize_state():
-	visible = Global.achieved_level_quantity >= level_id
+	visible = (Global.achieved_level_quantity >= level_id and not Global.is_game_mirrored
+		or Global.achieved_mirrored_level_quantity >= level_id and Global.is_game_mirrored)
+	
+	if Global.achieved_level_quantity > level_id and not Global.is_game_mirrored:
+		modulate = Color(0.5, 1.5, 0.5, 1)
+	elif Global.achieved_mirrored_level_quantity > level_id and Global.is_game_mirrored:
+		modulate = Color(0.5, 1.5, 0.5, 1)
+	else:
+		modulate = Global.COLOR_DEFAULT

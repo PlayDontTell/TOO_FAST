@@ -21,268 +21,268 @@ colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 64, 32 )
+region = Rect2( 128, 288, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 384, 64, 32 )
+region = Rect2( 128, 320, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 160, 64, 32 )
+region = Rect2( 128, 160, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 160, 64, 32 )
+region = Rect2( 0, 32, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 64, 32 )
+region = Rect2( 64, 32, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 32, 64, 32 )
+region = Rect2( 128, 192, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 64, 64, 32 )
+region = Rect2( 128, 96, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 320, 64, 32 )
+region = Rect2( 0, 96, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 160, 64, 32 )
+region = Rect2( 64, 96, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 64, 32 )
+region = Rect2( 0, 160, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 96, 64, 32 )
+region = Rect2( 64, 160, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 64, 32 )
+region = Rect2( 0, 128, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 96, 64, 32 )
+region = Rect2( 64, 128, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 224, 64, 32 )
+region = Rect2( 0, 352, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 224, 64, 32 )
+region = Rect2( 64, 352, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 64, 32 )
+region = Rect2( 128, 64, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 64, 32 )
+region = Rect2( 128, 224, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 288, 64, 32 )
+region = Rect2( 0, 320, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 256, 64, 32 )
+region = Rect2( 64, 320, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 128, 64, 32 )
+region = Rect2( 0, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 128, 64, 32 )
+region = Rect2( 64, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 320, 64, 32 )
+region = Rect2( 0, 64, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 320, 64, 32 )
+region = Rect2( 64, 64, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 32, 64, 32 )
+region = Rect2( 128, 352, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 352, 64, 32 )
+region = Rect2( 128, 128, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 352, 64, 32 )
+region = Rect2( 128, 384, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 64, 32 )
+region = Rect2( 128, 256, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 288, 64, 32 )
+region = Rect2( 128, 32, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 352, 64, 32 )
+region = Rect2( 0, 224, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 224, 64, 32 )
+region = Rect2( 64, 224, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 64, 32 )
+region = Rect2( 0, 192, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 256, 64, 32 )
+region = Rect2( 64, 192, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 64, 32 )
+region = Rect2( 0, 288, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 64, 32 )
+region = Rect2( 64, 288, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 384, 64, 32 )
+region = Rect2( 0, 384, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 128, 64, 32 )
+region = Rect2( 64, 384, 64, 32 )
 
 [sub_resource type="SpriteFrames" id=38]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "car_12_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "car_5_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "car_1_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ) ],
-"loop": false,
-"name": "car_2_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 9 ) ],
-"loop": true,
-"name": "car_10_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 10 ) ],
-"loop": true,
-"name": "car_5_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
-"name": "car_6_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 12 ) ],
-"loop": true,
-"name": "car_3_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ) ],
-"loop": true,
-"name": "car_3_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "car_7_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ) ],
-"loop": true,
-"name": "car_6_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 19 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "car_9_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 20 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "car_8_crash",
+"name": "car_10_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "car_5_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "car_1_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "car_6_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "car_3_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "car_3_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "car_5_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "car_4_default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 23 ), SubResource( 24 ) ],
-"loop": true,
-"name": "car_10_default",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 25 ) ],
-"loop": false,
-"name": "car_1_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 26 ), SubResource( 27 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "car_11_default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "car_9_default",
+"frames": [ SubResource( 17 ) ],
+"loop": false,
+"name": "car_2_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 30 ) ],
-"loop": true,
-"name": "car_11_crash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 31 ) ],
+"frames": [ SubResource( 18 ) ],
 "loop": true,
 "name": "car_7_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 32 ), SubResource( 33 ) ],
+"frames": [ SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "car_10_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "car_8_default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"frames": [ SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
 "name": "car_2_default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 36 ) ],
+"frames": [ SubResource( 25 ) ],
+"loop": true,
+"name": "car_11_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 26 ) ],
+"loop": true,
+"name": "car_4_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 27 ) ],
 "loop": true,
 "name": "car_12_crash",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 37 ) ],
+"frames": [ SubResource( 28 ) ],
 "loop": true,
-"name": "car_4_crash",
+"name": "car_8_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 29 ) ],
+"loop": false,
+"name": "car_1_crash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "car_7_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "car_6_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "car_9_default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ) ],
+"loop": true,
+"name": "car_12_default",
 "speed": 5.0
 } ]
 
@@ -716,5 +716,10 @@ bus = "Level_Fx"
 stream = ExtResource( 14 )
 volume_db = -8.0
 bus = "Level_Fx"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

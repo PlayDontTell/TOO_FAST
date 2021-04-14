@@ -15,6 +15,9 @@ var global_speed: float = 300
 var global_slow_speed: float = 50
 var time: float = 0
 var try_numero: int = 0
+var shield: bool = false
+
+var mirrored_offset_x: int = 0
 
 const TOTAL_OF_CARS: int = 12
 var cars_order: Array = []
@@ -53,17 +56,18 @@ var levels: Array = [
 
 [0.2,	130,	45,		2.5,	0.5,	4.20,	0.75,	1,		0,		0, 		false,		0],
 
-[0.5,	190,	55,		1.9,	1.1,	3.5,	1.25,	2,		17,		0.5, 	false,		110],
+[0.5,	190,	55,		1.8,	0.9,	3.5,	1.25,	2,		17,		0.5, 	false,		110],
 
-[0.8,	240,	65,		1.3,	1.7,	2.8,	1.75,	3,		14,		0.9, 	true,		130],
+[0.8,	250,	65,		1.1,	1.3,	2.8,	1.75,	3,		14,		0.9, 	true,		125],
 
-[1.2,	300,	75,		0.7,	2.3,	2.1,	2.25,	4,		10,		1.5, 	true,		150],
+[1.2,	310,	75,		0.4,	1.7,	2.1,	2.25,	4,		11,		1.5, 	true,		140],
 
-[99.0,	300,	75,		0.7,	2.3,	2.1,	2.25,	4,		10,		1.5, 	true,		150],
+[99.0,	310,	75,		0.4,	1.7,	2.1,	2.25,	4,		11,		1.5, 	true,		140],
 ]
 
 
 func _ready():
+	$HUD.visible = true
 	$HUD/RetryBase.visible = false
 	$HUD/Combo.visible = false
 	meters_per_pixel = Char_length_in_meters / Char_length_in_pixels
@@ -80,11 +84,13 @@ func start_level():
 	$Char.is_fine = true
 	$Char.gravity = 700
 	$Char/Sprite/AnimationPlayer.play("default")
-	$Char.position = Vector2(85, 137)
+	$Char.position = Vector2(1000, -100)
 	$Char.rotation_degrees = 0
 	$Char.z_index = 0
 	$Char.was_hit_by_police = false
 	$Char.enable_collisions()
+	
+	set_shield_disabled()
 	
 	$HUD/Progress.rect_size.x = 0
 	Global.player_in_game = true
@@ -104,6 +110,27 @@ func start_level():
 	$PanelTimer.wait_time = levels[current_level][level_panel_spawn_period] + randf() * levels[current_level][level_panel_spawn_period_random_factor]
 	$PanelTimer.start()
 	start_police()
+	set_mirrored_level(Global.is_game_mirrored)
+
+
+func set_mirrored_level(is_game_mirrored):
+	Global.mirror_factor = -1 if is_game_mirrored else 1
+	$Char.scale.x = Global.mirror_factor
+	$CharUnder.scale.x = Global.mirror_factor
+	levels[current_level][level_global_speed] *= Global.mirror_factor
+	levels[current_level][level_slow_speed] *= Global.mirror_factor
+	levels[current_level][level_police_speed] *= Global.mirror_factor
+	$HUD/Background.scale.x = Global.mirror_factor
+	if is_game_mirrored:
+		mirrored_offset_x = 384
+		$Char.position = Vector2(299, 137)
+		$HUD/Progress.rect_position.x = 383
+		$HUD/Background.position.x = 384
+	else:
+		mirrored_offset_x = 0
+		$Char.position = Vector2(85, 137)
+		$HUD/Progress.rect_position.x = 1
+		$HUD/Background.position.x = 0
 
 
 func finish_level():
@@ -112,8 +139,12 @@ func finish_level():
 	play_id += 1
 	level_playing = false
 	Global.player_in_game = false
-	if Global.achieved_level_quantity <= current_level:
-		Global.achieved_level_quantity = current_level + 1
+	if Global.is_game_mirrored:
+		if Global.achieved_mirrored_level_quantity <= current_level:
+			Global.achieved_mirrored_level_quantity = current_level + 1
+	else:
+		if Global.achieved_level_quantity <= current_level:
+			Global.achieved_level_quantity = current_level + 1
 	Global.save_game()
 	Global.set_level_fx_volume(-60)
 	$HUD/UI.reset_menu()
@@ -129,6 +160,7 @@ func finish_level():
 
 
 func stop_level():
+	set_shield_disabled()
 	$PanelTimer.stop()
 	$PoliceTimer.stop()
 	$SlowCarTimer.stop()
@@ -151,11 +183,11 @@ func stop_level():
 func set_level_parameter():
 	for i in $RoadBlocks.get_children():
 		i.position.x = 205
-		i.speed_x = -levels[current_level][level_global_speed]
+		i.speed_x = -levels[current_level][level_global_speed * Global.mirror_factor]
 		i.frame = current_level
 	for i in $Sides.get_children():
 		i.position.x = 205
-		i.speed_x = -levels[current_level][level_global_speed]
+		i.speed_x = -levels[current_level][level_global_speed * Global.mirror_factor]
 		i.frame = current_level
 	
 	$Background.frame = current_level
@@ -168,15 +200,15 @@ func set_level_parameter():
 	
 	$Char.slow_speed = global_slow_speed
 	$CharUnder/Brake.initial_velocity = global_speed
-	$CharUnder/Brake.lifetime = 400 / global_speed
+	$CharUnder/Brake.lifetime = abs(400 / global_speed)
 	$CharUnder/Brake2.initial_velocity = global_speed
-	$CharUnder/Brake2.lifetime = 400 / global_speed
+	$CharUnder/Brake2.lifetime = abs(400 / global_speed)
 
 
 func _process(delta):
 	if Global.player_in_game and not level_restarting:
 		time += delta
-	length_played_in_meters = time * global_speed * meters_per_pixel + ($Char.position.x - 100) * meters_per_pixel
+	length_played_in_meters = time * global_speed * meters_per_pixel + ($Char.position.x - 100) * meters_per_pixel * Global.mirror_factor
 	length_played_in_kilometers = stepify(length_played_in_meters / 1000, 0.01)
 	
 	$CharUnder.position = $Char.position
@@ -199,12 +231,42 @@ func _process(delta):
 	
 	if $HUD/Progress.rect_size.x < 371:
 		$HUD/Progress.rect_size.x = int(length_played_in_meters / 1000 / levels[current_level][level_length] * 371)
+		if Global.is_game_mirrored:
+			$HUD/Progress.rect_position.x = 383 - $HUD/Progress.rect_size.x
 		$HUD/Progress.modulate = Color(length_played_in_meters / 1000 / levels[current_level][level_length], 1, 0, 1)
-	elif level_playing:
+	elif level_playing and $Char.is_fine and not $Char.was_hit_by_police:
 		finish_level()
 	
 	if not $Char.is_fine:
-		$Char.position.x -= delta * global_speed
+		$Char.position.x -= delta * global_speed * Global.mirror_factor
+
+
+func set_shield_enabled():
+	shield = true
+	$Char/Glow.visible = true
+	$Char/GlowParticles.visible = true
+	$HUD/UI/Vignette.modulate = Color(1, 1, 1, 5)
+	$HUD/shieldLABEL.visible = true
+
+
+func set_shield_disabled():
+	shield = false
+	$Char/Glow.visible = false
+	$Char/GlowParticles.visible = false
+	$HUD/UI/Vignette.modulate = Color(1, 1, 1, 0.25)
+	$HUD/shieldLABEL.visible = false
+	$Char/ShieldActiveSound.stop()
+
+
+func enable_shield():
+	$Char/ShieldOn.play()
+	$Char/ShieldActiveSound.play()
+	set_shield_enabled()
+
+
+func disable_shield():
+	$Char/ShieldOff.play()
+	set_shield_disabled()
 
 
 func reset_combo():
@@ -215,7 +277,7 @@ func reset_combo():
 
 
 func increment_combo(id):
-	if not id in combo_id_list and combo < MAX_COMBO and $Char.position.y < 132:
+	if not id in combo_id_list and combo < MAX_COMBO and $Char.position.y < 132 and not shield and $Char.is_fine:
 		combo_id_list.append(id)
 		combo += 1
 		if combo == MAX_COMBO:
@@ -224,6 +286,8 @@ func increment_combo(id):
 
 
 func combo_max():
+	enable_shield()
+	reset_combo()
 	$ComboSound.play()
 	$HUD/Combo/ComboFigure1.visible = false
 	$HUD/Combo/ComboFigure2.visible = false
@@ -233,8 +297,9 @@ func combo_max():
 		yield(get_tree().create_timer(0.1), "timeout")
 		$HUD/Combo.visible = not $HUD/Combo.visible
 		$HUD/ComboMAX.visible = $HUD/Combo.visible
+		$HUD/shieldLABEL.visible = $HUD/Combo.visible
+	$HUD/shieldLABEL.visible = true
 	yield(get_tree().create_timer(0.8), "timeout")
-	reset_combo()
 
 
 func display_combo():
@@ -271,13 +336,16 @@ func display_combo():
 
 
 func set_char_stuck_in_panel(event_panel_id):
-	$Char.is_fine = false
-	$Char.gravity = 0
-	$Char/Sprite/AnimationPlayer.play("crash")
-	for i in $PanelFronts.get_children():
-		if i.id == event_panel_id:
-			i.explode()
-	setup_restart()
+	if shield:
+		disable_shield()
+	else:
+		$Char.is_fine = false
+		$Char.gravity = 0
+		$Char/Sprite/AnimationPlayer.play("crash")
+		for i in $PanelFronts.get_children():
+			if i.id == event_panel_id:
+				i.explode()
+		setup_restart()
 
 
 func shuffle_cars_order():
@@ -352,14 +420,14 @@ func spawn_police(play_id_instance):
 	if level_playing and play_id_instance == play_id and not levels[current_level][level_police_spawn_period] == 0:
 		var new_police_instance = ResourceLoader.load(new_police)
 		new_police_instance = new_police_instance.instance()
-		new_police_instance.speed = levels[current_level][level_police_speed]
+		new_police_instance.speed = levels[current_level][level_police_speed] * Global.mirror_factor
 		$PoliceCars.add_child(new_police_instance)
 		
 		if levels[current_level][level_police_double_patrol]:
 			yield(get_tree().create_timer(1.3), "timeout")
 			var new_police_instance_2 = ResourceLoader.load(new_police)
 			new_police_instance_2 = new_police_instance_2.instance()
-			new_police_instance_2.speed = levels[current_level][level_police_speed]
+			new_police_instance_2.speed = levels[current_level][level_police_speed] * Global.mirror_factor
 			$PoliceCars.add_child(new_police_instance_2)
 
 
@@ -379,6 +447,7 @@ func _on_PoliceTimer_timeout():
 func setup_restart():
 	$HUD/Combo.visible = false
 	$HUD/ComboMAX.visible = false
+	$HUD/Combo.visible = false
 	$RestartTimer.start()
 	level_restarting = true
 	

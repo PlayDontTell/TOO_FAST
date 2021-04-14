@@ -11,7 +11,11 @@ var speed: float = 10
 
 
 func _ready():
-	position = Vector2(431, 89)
+	scale.x = Global.mirror_factor
+	if Global.is_game_mirrored:
+		position = Vector2(-47, 89)
+	else:
+		position = Vector2(431, 89)
 	if tall_version and short_version:
 		frame_offset = 27
 	elif tall_version:
@@ -25,9 +29,14 @@ func _ready():
 
 
 func _process(delta):
-	position.x -= speed * delta
-	$Sprite.frame = 8 - int(abs(position.x) / 384 * 8) + frame_offset
-	if position.x < -80:
+	position.x -= speed * delta * Global.mirror_factor
+	if not Global.is_game_mirrored:
+		$Sprite.frame = 8 - int(abs(position.x) / 384 * 8) + frame_offset
+	else:
+		$Sprite.frame = int(abs(position.x) / 384 * 8) + frame_offset
+	if position.x < -80 and not Global.is_game_mirrored:
+		queue_free()
+	if position.x > 464 and Global.is_game_mirrored:
 		queue_free()
 
 

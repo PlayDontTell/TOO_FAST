@@ -15,7 +15,11 @@ var is_char_on_roof: bool = false
 
 
 func _ready():
-	position = Vector2(431, 138)
+	scale.x = Global.mirror_factor
+	if Global.is_game_mirrored:
+		position = Vector2(-47, 138)
+	else:
+		position = Vector2(431, 138)
 	honk_id = str(randi() % 9 + 1)
 	pollution_disaster_size = randf() * 0.1
 	$AnimationPlayer.play("car_" + str(car_type))
@@ -24,11 +28,12 @@ func _ready():
 
 
 func _physics_process(delta):
-	position.x -= speed * delta
+	position.x -= speed * delta * Global.mirror_factor
 	
-	if position.x < -80:
+	if position.x < -80 and not Global.is_game_mirrored:
 		queue_free()
-
+	if position.x > 384 + 80 and  Global.is_game_mirrored:
+		queue_free()
 
 func hit_by_police():
 	was_hit_by_police = true
@@ -36,12 +41,11 @@ func hit_by_police():
 	call_deferred("disable_collisions")
 	$Destroy.play()
 	$AnimatedSprite.play("car_" + str(car_type) + "_crash")
-	rotation_degrees = -15
-	linear_velocity = Vector2(-200 - randi() % 40, -180 - randi() % 40)
+	rotation_degrees = -15 * Global.mirror_factor
+	linear_velocity = Vector2((-200 - randi() % 40)* Global.mirror_factor, -180 - randi() % 40)
 	if is_char_on_roof:
-		char_instance.velocity = Vector2(-150, -270)
-	yield(get_tree().create_timer(0.4), "timeout")
-	z_index = -1
+		char_instance.velocity = Vector2(-150 * Global.mirror_factor, -270)
+	$Timer.start()
 
 
 func set_mode(new_mode):
@@ -69,3 +73,7 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_area_exited(area):
 	if area.is_in_group("char_collision_under"):
 		is_char_on_roof = false
+
+
+func _on_Timer_timeout():
+	z_index = -1

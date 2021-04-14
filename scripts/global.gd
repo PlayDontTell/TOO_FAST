@@ -7,6 +7,8 @@ var count_test: int = 0
 var language: String = "eng"
 var game_just_started: bool = false
 var achieved_level_quantity: int = 0 # From 0 to 7
+var achieved_mirrored_level_quantity: int = 0 # From 0 to 7
+var personal_best: float = 0 # From 0 to 7
 
 # UI variables
 var logo_visible: bool = false
@@ -18,6 +20,8 @@ var music_muted: bool = false
 var is_quit_button_displayed: bool = true
 var last_level_played: int = 0
 var player_in_game: bool = false
+var is_game_mirrored: bool = false
+var mirror_factor: int = 1
 
 # Colors
 const COLOR_DEFAULT = Color(1, 1, 1, 1)
@@ -76,6 +80,8 @@ func save_game():
 	var save_game = File.new()
 	save_game.open("user://savegame.save", File.WRITE)
 	save_game.store_line(str(achieved_level_quantity))
+	save_game.store_line(str(achieved_mirrored_level_quantity))
+	save_game.store_line(str(personal_best))
 	save_game.close()
 
 
@@ -85,4 +91,6 @@ func load_game():
 		return
 	save_game.open("user://savegame.save", File.READ)
 	achieved_level_quantity = int(save_game.get_line())
+	achieved_mirrored_level_quantity = int(save_game.get_line())
+	personal_best = float(save_game.get_line())
 	save_game.close()

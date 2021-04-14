@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/Cross.gd" type="Script" id=1]
 [ext_resource path="res://sprites/cross.png" type="Texture" id=2]
@@ -10,14 +10,12 @@
 [ext_resource path="res://sprites/cursors.png" type="Texture" id=8]
 [ext_resource path="res://scenes/UI.gd" type="Script" id=9]
 [ext_resource path="res://sprites/credits.png" type="Texture" id=10]
-[ext_resource path="res://sounds/Bop_4.wav" type="AudioStream" id=11]
-[ext_resource path="res://sounds/Bop_5.wav" type="AudioStream" id=12]
-[ext_resource path="res://sounds/Bop_1.wav" type="AudioStream" id=13]
-[ext_resource path="res://sounds/Bop_3.wav" type="AudioStream" id=14]
-[ext_resource path="res://sounds/Bop_7.wav" type="AudioStream" id=15]
-[ext_resource path="res://sounds/Bop_2.wav" type="AudioStream" id=16]
-[ext_resource path="res://sounds/Bop_6.wav" type="AudioStream" id=17]
-[ext_resource path="res://sounds/Bop_8.wav" type="AudioStream" id=18]
+[ext_resource path="res://sounds/switch9.wav" type="AudioStream" id=11]
+[ext_resource path="res://sprites/how_to_play_panel.png" type="Texture" id=12]
+[ext_resource path="res://sprites/howto_hover.png" type="Texture" id=13]
+[ext_resource path="res://sprites/howto_default.png" type="Texture" id=14]
+[ext_resource path="res://sprites/transparent.png" type="Texture" id=15]
+[ext_resource path="res://sprites/how_to_play_panel_2.png" type="Texture" id=16]
 [ext_resource path="res://sprites/play_hover.png" type="Texture" id=19]
 [ext_resource path="res://sprites/options_default.png" type="Texture" id=20]
 [ext_resource path="res://sprites/play_default.png" type="Texture" id=21]
@@ -30,35 +28,47 @@
 [ext_resource path="res://sprites/back_default.png" type="Texture" id=28]
 [ext_resource path="res://sprites/square2_hover.png" type="Texture" id=29]
 [ext_resource path="res://sprites/square2_default.png" type="Texture" id=30]
+[ext_resource path="res://sprites/square_hover.png" type="Texture" id=31]
 [ext_resource path="res://sprites/levels_label.png" type="Texture" id=32]
+[ext_resource path="res://sprites/square_default.png" type="Texture" id=33]
+[ext_resource path="res://sprites/square_1_mirror.png" type="Texture" id=34]
+[ext_resource path="res://scenes/MirrorButton.gd" type="Script" id=35]
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://effects/Grandstander/Grandstander-SemiBoldItalic.ttf"
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.5
+} ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://effects/Grandstander/Grandstander-SemiBold.ttf"
+
+[sub_resource type="DynamicFont" id=3]
 size = 18
-outline_size = 1
+outline_size = 6
 use_filter = true
 extra_spacing_top = 4
 extra_spacing_space = 2
-font_data = SubResource( 1 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 32, 32 )
+font_data = SubResource( 2 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 3 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "pressed",
 "speed": 5.0
@@ -94,19 +104,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="Node2D" parent="GlobalMenus"]
+[node name="HowToPlay" type="TextureButton" parent="GlobalMenus"]
 visible = false
+margin_left = 138.0
+margin_top = 62.0
+margin_right = 349.0
+margin_bottom = 207.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="GlobalMenus/HowToPlay"]
+frames = SubResource( 1 )
+playing = true
+centered = false
+
+[node name="Menu" type="Node2D" parent="GlobalMenus"]
 position = Vector2( 17, 16 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Play" type="TextureButton" parent="GlobalMenus/Menu"]
 margin_left = 177.0
-margin_top = 82.0
+margin_top = 73.0
 margin_right = 262.0
-margin_bottom = 98.0
+margin_bottom = 89.0
 focus_mode = 0
 enabled_focus_mode = 0
 texture_normal = ExtResource( 21 )
@@ -130,10 +156,10 @@ __meta__ = {
 }
 
 [node name="CreditsLink" type="TextureButton" parent="GlobalMenus/Menu"]
-margin_left = 177.0
-margin_top = 110.0
-margin_right = 262.0
-margin_bottom = 126.0
+margin_left = 176.603
+margin_top = 126.745
+margin_right = 261.603
+margin_bottom = 142.745
 focus_mode = 0
 enabled_focus_mode = 0
 texture_normal = ExtResource( 23 )
@@ -142,11 +168,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HowToLink" type="TextureButton" parent="GlobalMenus/Menu"]
+margin_left = 150.511
+margin_top = 98.635
+margin_right = 287.511
+margin_bottom = 116.635
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 14 )
+texture_hover = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Quit" type="TextureButton" parent="GlobalMenus/Menu"]
-margin_left = 177.0
-margin_top = 138.0
-margin_right = 262.0
-margin_bottom = 154.0
+margin_left = 176.603
+margin_top = 153.62
+margin_right = 261.603
+margin_bottom = 169.62
 focus_mode = 0
 enabled_focus_mode = 0
 texture_normal = ExtResource( 25 )
@@ -156,6 +195,7 @@ __meta__ = {
 }
 
 [node name="Levels" type="Node2D" parent="GlobalMenus"]
+visible = false
 
 [node name="LevelsBack" type="TextureButton" parent="GlobalMenus/Levels"]
 margin_left = 212.0
@@ -196,12 +236,31 @@ texture_normal = ExtResource( 30 )
 texture_hover = ExtResource( 29 )
 level_id = 4
 
+[node name="MirrorButton" type="TextureButton" parent="GlobalMenus/Levels/Squares"]
+margin_left = 289.567
+margin_top = 139.152
+margin_right = 337.567
+margin_bottom = 187.152
+toggle_mode = true
+texture_normal = ExtResource( 33 )
+texture_hover = ExtResource( 31 )
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MirrorButtonSprite" type="Sprite" parent="GlobalMenus/Levels/Squares/MirrorButton"]
+show_behind_parent = true
+texture = ExtResource( 34 )
+centered = false
+hframes = 2
+
 [node name="Label" type="Sprite" parent="GlobalMenus/Levels"]
 position = Vector2( 241, 76 )
 texture = ExtResource( 32 )
 
 [node name="Vignette" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.25098 )
+self_modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 5 )
 centered = false
 __meta__ = {
@@ -209,17 +268,17 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 458.0
-margin_top = 157.0
-margin_right = 699.0
-margin_bottom = 303.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+margin_left = 395.011
+margin_top = 158.342
+margin_right = 667.011
+margin_bottom = 304.342
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
-text = "arcade"
+text = "A W S D"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -271,49 +330,22 @@ __meta__ = {
 output = "fx"
 
 [node name="Cursor" type="AnimatedSprite" parent="."]
-frames = SubResource( 5 )
+frames = SubResource( 6 )
 animation = "pressed"
 
-[node name="Bopsounds" type="Node2D" parent="Cursor"]
-
-[node name="Bop_1" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 13 )
-bus = "Fx"
-
-[node name="Bop_2" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 16 )
-bus = "Fx"
-
-[node name="Bop_3" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 14 )
-bus = "Fx"
-
-[node name="Bop_4" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
+[node name="CursorSound" type="AudioStreamPlayer" parent="Cursor"]
 stream = ExtResource( 11 )
-bus = "Fx"
-
-[node name="Bop_5" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 12 )
-bus = "Fx"
-
-[node name="Bop_6" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 17 )
-bus = "Fx"
-
-[node name="Bop_7" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 15 )
-bus = "Fx"
-
-[node name="Bop_8" type="AudioStreamPlayer" parent="Cursor/Bopsounds"]
-stream = ExtResource( 18 )
 bus = "Fx"
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="GlobalMenus/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="GlobalMenus/HowToPlay" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="GlobalMenus/Menu/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="GlobalMenus/Menu/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="GlobalMenus/Menu/CreditsLink" to="." method="_on_CreditsLink_pressed"]
+[connection signal="pressed" from="GlobalMenus/Menu/HowToLink" to="." method="_on_HowToLink_pressed"]
 [connection signal="pressed" from="GlobalMenus/Menu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="GlobalMenus/Levels/LevelsBack" to="." method="_on_LevelsBack_pressed"]
+[connection signal="toggled" from="GlobalMenus/Levels/Squares/MirrorButton" to="." method="_on_MirrorButton_toggled"]
 [connection signal="pressed" from="Cross" to="Cross" method="_on_Cross_pressed"]
 [connection signal="pressed" from="Cross2" to="Cross2" method="_on_Cross_pressed"]

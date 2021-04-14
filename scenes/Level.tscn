@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Char.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/RoadBlock.tscn" type="PackedScene" id=2]
@@ -16,6 +16,9 @@
 extents = Vector2( 206, 9 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 208.529, 14.2705 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15, 440 )
 
 [node name="Level" type="Node2D"]
@@ -47,11 +50,12 @@ position = Vector2( 205, 185 )
 [node name="PanelBacks" type="Node2D" parent="."]
 
 [node name="CharUnder" parent="." instance=ExtResource( 6 )]
+position = Vector2( 325.538, 304.2 )
 
 [node name="OtherCars" type="Node2D" parent="."]
 
 [node name="Char" parent="." instance=ExtResource( 1 )]
-position = Vector2( 85, 137 )
+position = Vector2( 670.484, 120.737 )
 collision/safe_margin = 1.0
 
 [node name="PoliceCars" type="Node2D" parent="."]
@@ -67,6 +71,17 @@ __meta__ = {
 position = Vector2( 191, 162 )
 shape = SubResource( 1 )
 
+[node name="GroundArea" type="Area2D" parent="." groups=[
+"ground",
+]]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundArea"]
+position = Vector2( 191, 162 )
+shape = SubResource( 2 )
+
 [node name="Wall1" type="StaticBody2D" parent="."]
 __meta__ = {
 "_edit_group_": true,
@@ -75,7 +90,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1"]
 position = Vector2( -25, -222 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Wall2" type="StaticBody2D" parent="."]
 __meta__ = {
@@ -85,9 +100,10 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
 position = Vector2( 409, -224 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="ComboSound" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

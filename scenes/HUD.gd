@@ -5,6 +5,7 @@ onready var level = get_node("..")
 
 
 func _ready():
+	$UI.visible = true
 	$PauseBackground.visible = false
 
 

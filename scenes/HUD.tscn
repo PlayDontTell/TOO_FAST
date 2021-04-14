@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://sounds/firework.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/hud.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://sprites/font_bold.png" type="Texture" id=21]
 [ext_resource path="res://sprites/MAX.png" type="Texture" id=22]
 [ext_resource path="res://sprites/marks.png" type="Texture" id=23]
+[ext_resource path="res://sprites/SHIELD_LABEL.png" type="Texture" id=24]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.370192 )
@@ -48,7 +49,6 @@ margin_right = 1.0
 margin_bottom = 174.0
 color = Color( 1, 0.74902, 0, 1 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -127,6 +127,10 @@ frame = 9
 [node name="ComboMAX" type="Sprite" parent="."]
 position = Vector2( 235, 11 )
 texture = ExtResource( 22 )
+
+[node name="shieldLABEL" type="Sprite" parent="."]
+position = Vector2( 201.887, 29.4234 )
+texture = ExtResource( 24 )
 
 [node name="Distance" type="Node2D" parent="."]
 position = Vector2( 187, 184 )
@@ -308,6 +312,7 @@ __meta__ = {
 }
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
