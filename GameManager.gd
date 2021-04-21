@@ -3,6 +3,7 @@ extends Node2D
 var lang_screen = "res://levels/LangScreen.tscn"
 var logo_screen = "res://scenes/LogoScreen.tscn"
 var level = "res://scenes/Level.tscn"
+var leaderboard = "res://scenes/Leaderboard.tscn"
 
 
 func _ready():

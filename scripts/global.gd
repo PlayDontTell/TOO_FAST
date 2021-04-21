@@ -2,13 +2,15 @@ extends Node
 
 
 # Meta variables
-const DEV_MODE: bool = not true
+const DEV_MODE: bool = true
 var count_test: int = 0
 var language: String = "eng"
 var game_just_started: bool = false
 var achieved_level_quantity: int = 0 # From 0 to 7
 var achieved_mirrored_level_quantity: int = 0 # From 0 to 7
 var personal_best: float = 0 # From 0 to 7
+var latest_arcade_score: float
+const HTML5: bool = false
 
 # UI variables
 var logo_visible: bool = false
@@ -23,6 +25,12 @@ var player_in_game: bool = false
 var is_game_mirrored: bool = false
 var mirror_factor: int = 1
 
+# Leaderboard variables
+var personal_best_position
+var latest_score_above_and_below
+var latest_score_position
+var wr_score
+
 # Colors
 const COLOR_DEFAULT = Color(1, 1, 1, 1)
 const COLOR_HIGHLIGHT = Color(4, 4, 4, 1)
@@ -35,6 +43,16 @@ const COLOR_WHITE = Color(4, 4, 4, 1)
 func _ready():
 	OS.window_fullscreen =  not DEV_MODE
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	SilentWolf.configure({
+			  "api_key": "LCWcdaAZUfNitWE6RSrx9PxAoY6lCcl9ZZXPbRx3",
+			  "game_id": "TOOFAST",
+			  "game_version": "1.0.0",
+			  "log_level": 1
+			})
+
+	SilentWolf.configure_scores({
+		"open_scene_on_close": "res://scenes/MainPage.tscn"
+	})
 
 
 func print_test():

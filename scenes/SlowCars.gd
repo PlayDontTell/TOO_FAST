@@ -28,11 +28,9 @@ func _ready():
 
 
 func _physics_process(delta):
-	position.x -= speed * delta * Global.mirror_factor
+	position.x -= speed * delta
 	
-	if position.x < -80 and not Global.is_game_mirrored:
-		queue_free()
-	if position.x > 384 + 80 and  Global.is_game_mirrored:
+	if (position.x < -80 and not Global.is_game_mirrored) or (position.x > 384 + 80 and  Global.is_game_mirrored):
 		queue_free()
 
 func hit_by_police():

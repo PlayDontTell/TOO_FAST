@@ -6,13 +6,14 @@ onready var levels = get_node("../..")
 
 
 func _ready():
-	
+	set_buttons_mirror_state()
 	if Global.player_in_game:
 		$GlobalMenus.position = Vector2(400, 0)
 		levels.current_level = Global.last_level_played
 		yield(get_tree(), "idle_frame")
 		levels.start_level()
-	$GlobalMenus/Menu/Quit.visible = Global.is_quit_button_displayed
+	if not Global.HTML5:
+		$GlobalMenus/Menu/Quit.visible = Global.is_quit_button_displayed
 	reset_menu()
 	$GlobalMenus/Menu.visible = true
 	if not Global.game_just_started:
@@ -103,19 +104,20 @@ func slide_menu_in():
 # warning-ignore:unused_argument
 func _on_MirrorButton_toggled(button_pressed):
 	if Global.is_game_mirrored:
-		$GlobalMenus/Levels/Squares/MirrorButton/MirrorButtonSprite.frame = 0
 		Global.is_game_mirrored = false
-		for i in $GlobalMenus/Levels/Squares.get_children():
-			i.initialize_state()
-			if i.has_node("Set/font"):
-				i.get_node("Set/font").flip_h = false
+		Global.mirror_factor = 1
 	else:
-		$GlobalMenus/Levels/Squares/MirrorButton/MirrorButtonSprite.frame = 1
 		Global.is_game_mirrored = true
+		Global.mirror_factor = -1
+	set_buttons_mirror_state()
+
+
+func set_buttons_mirror_state():
+	if not Global.is_game_mirrored:
 		for i in $GlobalMenus/Levels/Squares.get_children():
 			i.initialize_state()
-			if i.has_node("Set/font"):
-				i.get_node("Set/font").flip_h = true
-
-
-
+			i.rect_scale = Vector2(1, 1)
+	else:
+		for i in $GlobalMenus/Levels/Squares.get_children():
+			i.initialize_state()
+			i.rect_scale = Vector2(-1, 1)

@@ -38,10 +38,10 @@ func _ready():
 
 
 func _process(delta):
-	position.x -= speed * delta * Global.mirror_factor
+	position.x -= speed * delta
 	if not Global.is_game_mirrored:
 		$Sprite.frame = 8 - int(abs(position.x) / 384 * 8) + frame_offset
-	else:
+	elif int(abs(position.x) / 384 * 8) + frame_offset < 36:
 		$Sprite.frame = int(abs(position.x) / 384 * 8) + frame_offset
 	if position.x < -80 and not Global.is_game_mirrored:
 		queue_free()

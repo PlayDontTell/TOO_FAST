@@ -9,6 +9,7 @@ onready var new_police = "res://scenes/Police.tscn"
 var Char_length_in_meters: float = 4.22
 var Char_length_in_pixels: float = 63
 var meters_per_pixel: float
+var dev_factor: int = 1
 var length_played_in_meters: float = 0
 var length_played_in_kilometers: float = 0
 var global_speed: float = 300
@@ -67,6 +68,8 @@ var levels: Array = [
 
 
 func _ready():
+#	SilentWolf.Scores.wipe_leaderboard()
+	$LoadingScores.visible = false
 	$HUD.visible = true
 	$HUD/RetryBase.visible = false
 	$HUD/Combo.visible = false
@@ -77,6 +80,8 @@ func _ready():
 
 func start_level():
 	level_restarting = false
+	set_level_parameter()
+	
 	Global.toggle_pause_off()
 	
 	$HUD/RetryBase.visible = false
@@ -84,9 +89,7 @@ func start_level():
 	$Char.is_fine = true
 	$Char.gravity = 700
 	$Char/Sprite/AnimationPlayer.play("default")
-	$Char.position = Vector2(1000, -100)
 	$Char.rotation_degrees = 0
-	$Char.z_index = 0
 	$Char.was_hit_by_police = false
 	$Char.enable_collisions()
 	
@@ -97,8 +100,7 @@ func start_level():
 	time = 0
 	length_played_in_meters = 0
 	panel_id = 0
-	set_level_parameter()
-		
+
 	reset_combo()
 	$HUD/ComboMAX.visible = false
 	Global.set_level_fx_volume(0)
@@ -110,27 +112,6 @@ func start_level():
 	$PanelTimer.wait_time = levels[current_level][level_panel_spawn_period] + randf() * levels[current_level][level_panel_spawn_period_random_factor]
 	$PanelTimer.start()
 	start_police()
-	set_mirrored_level(Global.is_game_mirrored)
-
-
-func set_mirrored_level(is_game_mirrored):
-	Global.mirror_factor = -1 if is_game_mirrored else 1
-	$Char.scale.x = Global.mirror_factor
-	$CharUnder.scale.x = Global.mirror_factor
-	levels[current_level][level_global_speed] *= Global.mirror_factor
-	levels[current_level][level_slow_speed] *= Global.mirror_factor
-	levels[current_level][level_police_speed] *= Global.mirror_factor
-	$HUD/Background.scale.x = Global.mirror_factor
-	if is_game_mirrored:
-		mirrored_offset_x = 384
-		$Char.position = Vector2(299, 137)
-		$HUD/Progress.rect_position.x = 383
-		$HUD/Background.position.x = 384
-	else:
-		mirrored_offset_x = 0
-		$Char.position = Vector2(85, 137)
-		$HUD/Progress.rect_position.x = 1
-		$HUD/Background.position.x = 0
 
 
 func finish_level():
@@ -181,64 +162,84 @@ func stop_level():
 
 
 func set_level_parameter():
+	$HUD/Background.visible = not current_level == 4
+	$HUD/Marks.visible = not current_level == 4
+	$HUD/Progress.visible = not current_level == 4
+	if current_level == 4:
+		$HUD/Distance.position.y = 164
+	else:
+		$HUD/Distance.position.y = 184
+	set_mirrored_level()
 	for i in $RoadBlocks.get_children():
 		i.position.x = 205
-		i.speed_x = -levels[current_level][level_global_speed * Global.mirror_factor]
+		i.speed_x = -global_speed
 		i.frame = current_level
+		i.is_next_road_block_spawned = false
 	for i in $Sides.get_children():
 		i.position.x = 205
-		i.speed_x = -levels[current_level][level_global_speed * Global.mirror_factor]
+		i.speed_x = -global_speed
 		i.frame = current_level
+		i.is_next_road_block_spawned = false
 	
 	$Background.frame = current_level
 
 	shuffle_cars_order()
 	panel_id = 0
 	
-	global_speed = levels[current_level][level_global_speed]
-	global_slow_speed = levels[current_level][level_slow_speed]
-	
 	$Char.slow_speed = global_slow_speed
-	$CharUnder/Brake.initial_velocity = global_speed
+	$CharUnder/Brake.initial_velocity = global_speed * Global.mirror_factor
 	$CharUnder/Brake.lifetime = abs(400 / global_speed)
-	$CharUnder/Brake2.initial_velocity = global_speed
+	$CharUnder/Brake2.initial_velocity = global_speed * Global.mirror_factor
 	$CharUnder/Brake2.lifetime = abs(400 / global_speed)
+
+
+func set_mirrored_level():
+	$Char.z_index = 0
+	global_speed = levels[current_level][level_global_speed] * Global.mirror_factor
+	global_slow_speed = levels[current_level][level_slow_speed] * Global.mirror_factor
+	
+	$Char.scale = Vector2(Global.mirror_factor, 1)
+	$CharUnder.scale.x = Global.mirror_factor
+	
+	$HUD/Background.scale.x = Global.mirror_factor
+	
+	if Global.is_game_mirrored:
+		mirrored_offset_x = 384
+		$Char.position = Vector2(299, 137)
+		$HUD/Progress.rect_position.x = 383
+		$HUD/Background.position.x = 384
+	else:
+		mirrored_offset_x = 0
+		$Char.position = Vector2(85, 137)
+		$HUD/Progress.rect_position.x = 1
+		$HUD/Background.position.x = 0
 
 
 func _process(delta):
 	if Global.player_in_game and not level_restarting:
 		time += delta
-	length_played_in_meters = time * global_speed * meters_per_pixel + ($Char.position.x - 100) * meters_per_pixel * Global.mirror_factor
-	length_played_in_kilometers = stepify(length_played_in_meters / 1000, 0.01)
+	length_played_in_meters = time * global_speed * Global.mirror_factor * meters_per_pixel * dev_factor + ($Char.position.x - 100) * meters_per_pixel * Global.mirror_factor
+	length_played_in_kilometers = stepify(length_played_in_meters / 1000, 0.001)
 	
 	$CharUnder.position = $Char.position
-	$CharUnder.velocity = $Char.velocity
 	$CharUnder.is_char_on_floor = $Char.is_on_floor()
 	$CharUnder.is_char_on_the_road = not $Char.position.y < 132
 	
 	$HUD/Distance.position.x = $Char.position.x + 8
 	
-	if $HUD/Progress.rect_size.x <= 369:
-		$HUD/Distance/Figure_1.frame = int(str(length_played_in_kilometers)[0])
-		if str(length_played_in_kilometers).length() >= 3:
-			$HUD/Distance/Figure_2.frame = int(str(length_played_in_kilometers)[2])
-		else:
-			$HUD/Distance/Figure_2.frame = 10
-		if str(length_played_in_kilometers).length() >= 4:
-			$HUD/Distance/Figure_3.frame = int(str(length_played_in_kilometers)[3])
-		else:
-			$HUD/Distance/Figure_3.frame = 10
+	if $HUD/Progress.rect_size.x <= 369 or current_level == 4:
+		$HUD/Distance/SevenDigitNumber.write_number(stepify(length_played_in_kilometers, 0.01))
 	
 	if $HUD/Progress.rect_size.x < 371:
 		$HUD/Progress.rect_size.x = int(length_played_in_meters / 1000 / levels[current_level][level_length] * 371)
 		if Global.is_game_mirrored:
 			$HUD/Progress.rect_position.x = 383 - $HUD/Progress.rect_size.x
 		$HUD/Progress.modulate = Color(length_played_in_meters / 1000 / levels[current_level][level_length], 1, 0, 1)
-	elif level_playing and $Char.is_fine and not $Char.was_hit_by_police:
+	elif level_playing and $Char.is_fine and not $Char.was_hit_by_police and not current_level == 4:
 		finish_level()
 	
 	if not $Char.is_fine:
-		$Char.position.x -= delta * global_speed * Global.mirror_factor
+		$Char.position.x -= delta * global_speed
 
 
 func set_shield_enabled():
@@ -297,8 +298,11 @@ func combo_max():
 		yield(get_tree().create_timer(0.1), "timeout")
 		$HUD/Combo.visible = not $HUD/Combo.visible
 		$HUD/ComboMAX.visible = $HUD/Combo.visible
-		$HUD/shieldLABEL.visible = $HUD/Combo.visible
-	$HUD/shieldLABEL.visible = true
+		if $HUD/Combo.visible:
+			$HUD/shieldLABEL.modulate = Color(1, 1, 1, 1)
+		else:
+			$HUD/shieldLABEL.modulate = Color(1, 1, 1, 0)
+	$HUD/shieldLABEL.modulate = Color(1, 1, 1, 1)
 	yield(get_tree().create_timer(0.8), "timeout")
 
 
@@ -339,6 +343,7 @@ func set_char_stuck_in_panel(event_panel_id):
 	if shield:
 		disable_shield()
 	else:
+		Global.latest_arcade_score = int(length_played_in_kilometers * 1000)
 		$Char.is_fine = false
 		$Char.gravity = 0
 		$Char/Sprite/AnimationPlayer.play("crash")
@@ -448,31 +453,48 @@ func setup_restart():
 	$HUD/Combo.visible = false
 	$HUD/ComboMAX.visible = false
 	$HUD/Combo.visible = false
-	$RestartTimer.start()
 	level_restarting = true
 	
-	$HUD/RetryBase/Distance2/Figure_1.frame = int(str(levels[current_level][level_length])[0])
-	if str(levels[current_level][level_length]).length() >= 3:
-		$HUD/RetryBase/Distance2/Figure_2.frame = int(str(levels[current_level][level_length])[2])
+	if not current_level == 4:
+		$RestartTimer.start()
+		$HUD/RetryBase/Distance2/Figure_1.frame = int(str(levels[current_level][level_length])[0])
+		if str(levels[current_level][level_length]).length() >= 3:
+			$HUD/RetryBase/Distance2/Figure_2.frame = int(str(levels[current_level][level_length])[2])
+		else:
+			$HUD/RetryBase/Distance2/Figure_2.frame = 0
+		if str(levels[current_level][level_length]).length() >= 4:
+			$HUD/RetryBase/Distance2/Figure_3.frame = int(str(levels[current_level][level_length])[3])
+		else:
+			$HUD/RetryBase/Distance2/Figure_3.frame = 0
+		
+		
+		$HUD/RetryBase/Distance3/Figure_1.frame = int(str(length_played_in_kilometers)[0])
+		if str(length_played_in_kilometers).length() >= 3:
+			$HUD/RetryBase/Distance3/Figure_2.frame = int(str(length_played_in_kilometers)[2])
+		else:
+			$HUD/RetryBase/Distance3/Figure_2.frame = 0
+		if str(length_played_in_kilometers).length() >= 4:
+			$HUD/RetryBase/Distance3/Figure_3.frame = int(str(length_played_in_kilometers)[3])
+		else:
+			$HUD/RetryBase/Distance3/Figure_3.frame = 0
+		
+		$HUD/RetryBase.visible = true
 	else:
-		$HUD/RetryBase/Distance2/Figure_2.frame = 0
-	if str(levels[current_level][level_length]).length() >= 4:
-		$HUD/RetryBase/Distance2/Figure_3.frame = int(str(levels[current_level][level_length])[3])
-	else:
-		$HUD/RetryBase/Distance2/Figure_3.frame = 0
-	
-	
-	$HUD/RetryBase/Distance3/Figure_1.frame = int(str(length_played_in_kilometers)[0])
-	if str(length_played_in_kilometers).length() >= 3:
-		$HUD/RetryBase/Distance3/Figure_2.frame = int(str(length_played_in_kilometers)[2])
-	else:
-		$HUD/RetryBase/Distance3/Figure_2.frame = 0
-	if str(length_played_in_kilometers).length() >= 4:
-		$HUD/RetryBase/Distance3/Figure_3.frame = int(str(length_played_in_kilometers)[3])
-	else:
-		$HUD/RetryBase/Distance3/Figure_3.frame = 0
-	
-	$HUD/RetryBase.visible = true
+		$LoadingScores.visible = true
+		yield(SilentWolf.Scores.get_high_scores(1), "sw_scores_received")
+		Global.wr_score = SilentWolf.Scores.scores
+		yield(SilentWolf.Scores.get_scores_around(Global.latest_arcade_score, 2), "sw_scores_around_received")
+		Global.latest_score_above_and_below = SilentWolf.Scores
+		Global.latest_score_position = SilentWolf.Scores.position
+		yield(SilentWolf.Scores.get_score_position(Global.personal_best), "sw_position_received")
+		Global.personal_best_position = SilentWolf.Scores.position
+		if Global.wr_score.size() > 0:
+			if Global.personal_best == Global.wr_score[0].score:
+				Global.personal_best_position = 1
+			if Global.personal_best != Global.wr_score[0].score and Global.personal_best_position > 2:
+				Global.personal_best_position -= 1
+		Global.player_in_game = false
+		game_manager.load_scene(game_manager.leaderboard)
 
 
 func _on_RestartTimer_timeout():

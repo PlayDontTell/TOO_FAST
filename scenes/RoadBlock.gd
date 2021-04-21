@@ -15,7 +15,7 @@ func _ready():
 
 func _process(delta):
 	if Global.player_in_game:
-		position.x += delta * speed_x * Global.mirror_factor
+		position.x += delta * speed_x
 		
 		if Global.is_game_mirrored:
 			if position.x >= 224 and not is_next_road_block_spawned:
@@ -25,7 +25,7 @@ func _process(delta):
 				next_road_block = next_road_block.instance()
 				next_road_block.speed_x = speed_x
 				next_road_block.frame = level.current_level
-				next_road_block.position = Vector2(position.x + 478 * Global.mirror_factor, position.y)
+				next_road_block.position = Vector2(position.x - 478, position.y)
 				
 				group.add_child(next_road_block)
 			

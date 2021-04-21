@@ -16,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	if Global.player_in_game:
-		position.x += delta * speed_x * Global.mirror_factor
+		position.x += delta * speed_x
 		
 		if Global.is_game_mirrored:
 			if position.x >= 224 and not is_next_road_block_spawned:

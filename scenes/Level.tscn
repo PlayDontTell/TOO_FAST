@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Char.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/RoadBlock.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/Side.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/bells.wav" type="AudioStream" id=10]
 [ext_resource path="res://sounds/level_start.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/LoadingScores.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 206, 9 )
@@ -104,6 +105,8 @@ shape = SubResource( 3 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 visible = false
+
+[node name="LoadingScores" parent="." instance=ExtResource( 12 )]
 
 [node name="ComboSound" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

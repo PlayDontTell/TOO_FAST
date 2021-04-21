@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://sounds/firework.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/hud.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://sprites/MAX.png" type="Texture" id=22]
 [ext_resource path="res://sprites/marks.png" type="Texture" id=23]
 [ext_resource path="res://sprites/SHIELD_LABEL.png" type="Texture" id=24]
+[ext_resource path="res://scenes/SevenDigitNumber.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.370192 )
@@ -115,14 +116,14 @@ __meta__ = {
 [node name="ComboFigure1" type="Sprite" parent="Combo"]
 position = Vector2( 63, -1 )
 texture = ExtResource( 4 )
-hframes = 11
-frame = 9
+hframes = 12
+frame = 10
 
 [node name="ComboFigure2" type="Sprite" parent="Combo"]
 position = Vector2( 75, -1 )
 texture = ExtResource( 4 )
-hframes = 11
-frame = 9
+hframes = 12
+frame = 10
 
 [node name="ComboMAX" type="Sprite" parent="."]
 position = Vector2( 235, 11 )
@@ -134,31 +135,15 @@ texture = ExtResource( 24 )
 
 [node name="Distance" type="Node2D" parent="."]
 position = Vector2( 187, 184 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Base" type="Sprite" parent="Distance"]
 position = Vector2( -5, 1 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Figure_1" type="Sprite" parent="Distance"]
-position = Vector2( -33, 0 )
-texture = ExtResource( 4 )
-hframes = 11
-frame = 9
-
-[node name="Figure_2" type="Sprite" parent="Distance"]
-position = Vector2( -16, 0 )
-texture = ExtResource( 4 )
-hframes = 11
-frame = 9
-
-[node name="Figure_3" type="Sprite" parent="Distance"]
-position = Vector2( -4, 0 )
-texture = ExtResource( 4 )
-hframes = 11
-frame = 9
+[node name="SevenDigitNumber" parent="Distance" instance=ExtResource( 25 )]
 
 [node name="Score" type="Node2D" parent="."]
 visible = false

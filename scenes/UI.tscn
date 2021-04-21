@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/Cross.gd" type="Script" id=1]
 [ext_resource path="res://sprites/cross.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sprites/howto_default.png" type="Texture" id=14]
 [ext_resource path="res://sprites/transparent.png" type="Texture" id=15]
 [ext_resource path="res://sprites/how_to_play_panel_2.png" type="Texture" id=16]
+[ext_resource path="res://sprites/square_2_mirror.png" type="Texture" id=17]
 [ext_resource path="res://sprites/play_hover.png" type="Texture" id=19]
 [ext_resource path="res://sprites/options_default.png" type="Texture" id=20]
 [ext_resource path="res://sprites/play_default.png" type="Texture" id=21]
@@ -28,9 +29,7 @@
 [ext_resource path="res://sprites/back_default.png" type="Texture" id=28]
 [ext_resource path="res://sprites/square2_hover.png" type="Texture" id=29]
 [ext_resource path="res://sprites/square2_default.png" type="Texture" id=30]
-[ext_resource path="res://sprites/square_hover.png" type="Texture" id=31]
 [ext_resource path="res://sprites/levels_label.png" type="Texture" id=32]
-[ext_resource path="res://sprites/square_default.png" type="Texture" id=33]
 [ext_resource path="res://sprites/square_1_mirror.png" type="Texture" id=34]
 [ext_resource path="res://scenes/MirrorButton.gd" type="Script" id=35]
 
@@ -47,7 +46,7 @@ font_path = "res://effects/Grandstander/Grandstander-SemiBold.ttf"
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
-outline_size = 6
+outline_size = 2
 use_filter = true
 extra_spacing_top = 4
 extra_spacing_space = 2
@@ -195,7 +194,6 @@ __meta__ = {
 }
 
 [node name="Levels" type="Node2D" parent="GlobalMenus"]
-visible = false
 
 [node name="LevelsBack" type="TextureButton" parent="GlobalMenus/Levels"]
 margin_left = 212.0
@@ -213,25 +211,32 @@ __meta__ = {
 [node name="Squares" type="Node2D" parent="GlobalMenus/Levels"]
 
 [node name="LevelSquare" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+rect_pivot_offset = Vector2( 24, 24 )
 
 [node name="LevelSquare2" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
 margin_left = 186.0
 margin_right = 234.0
+rect_pivot_offset = Vector2( 24, 24 )
 level_id = 1
 
 [node name="LevelSquare3" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
 margin_left = 238.0
 margin_right = 286.0
+rect_pivot_offset = Vector2( 24, 24 )
 level_id = 2
 
 [node name="LevelSquare4" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
 margin_left = 290.0
 margin_right = 338.0
+rect_pivot_offset = Vector2( 24, 24 )
 level_id = 3
 
 [node name="LevelSquare5" parent="GlobalMenus/Levels/Squares" instance=ExtResource( 7 )]
+anchor_right = 1.0
 margin_top = 139.0
+margin_right = 286.0
 margin_bottom = 187.0
+rect_pivot_offset = Vector2( 76, 24 )
 texture_normal = ExtResource( 30 )
 texture_hover = ExtResource( 29 )
 level_id = 4
@@ -241,19 +246,17 @@ margin_left = 289.567
 margin_top = 139.152
 margin_right = 337.567
 margin_bottom = 187.152
+rect_pivot_offset = Vector2( 24, 24 )
+focus_mode = 0
 toggle_mode = true
-texture_normal = ExtResource( 33 )
-texture_hover = ExtResource( 31 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 17 )
+texture_hover = ExtResource( 34 )
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MirrorButtonSprite" type="Sprite" parent="GlobalMenus/Levels/Squares/MirrorButton"]
-show_behind_parent = true
-texture = ExtResource( 34 )
-centered = false
-hframes = 2
 
 [node name="Label" type="Sprite" parent="GlobalMenus/Levels"]
 position = Vector2( 241, 76 )
@@ -268,17 +271,17 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 395.011
-margin_top = 158.342
-margin_right = 667.011
-margin_bottom = 304.342
+margin_left = 395.0
+margin_top = 158.0
+margin_right = 667.0
+margin_bottom = 304.0
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
-text = "A W S D"
+text = "loading scores ..."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

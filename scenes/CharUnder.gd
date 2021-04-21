@@ -13,8 +13,12 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
-	$Brake.emitting = is_char_on_floor and Input.get_action_strength("ui_left") > 0 and is_char_on_the_road
-	$Brake2.emitting = is_char_on_floor and Input.get_action_strength("ui_left") > 0 and is_char_on_the_road
+	if Global.is_game_mirrored:
+		$Brake.emitting = is_char_on_floor and Input.get_action_strength("ui_right") > 0 and is_char_on_the_road
+		$Brake2.emitting = is_char_on_floor and Input.get_action_strength("ui_right") > 0 and is_char_on_the_road
+	else:
+		$Brake.emitting = is_char_on_floor and Input.get_action_strength("ui_left") > 0 and is_char_on_the_road
+		$Brake2.emitting = is_char_on_floor and Input.get_action_strength("ui_left") > 0 and is_char_on_the_road
 	
 	if Input.get_action_strength("ui_left") > 0 and is_char_on_the_road:
 		$TireSound.volume_db = lerp($TireSound.volume_db,

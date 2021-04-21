@@ -21,6 +21,11 @@ var glow_amplitude: float = 0.3
 var time: float = 0
 
 
+func _ready():
+	rotation_degrees = 0
+	scale.x = Global.mirror_factor
+
+
 func get_input():
 	var dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if dir != 0:
@@ -52,7 +57,7 @@ func _physics_process(delta):
 		if position.y < 132:
 			$Sprite/AnimationPlayer.play("default_in_the_air")
 			if is_on_floor() and Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left") == 0:
-				velocity.x = lerp(velocity.x, -slow_speed * Global.mirror_factor, 0.2)
+				velocity.x = lerp(velocity.x, -slow_speed, 0.2)
 		else:
 			$Sprite/AnimationPlayer.play("default")
 			level.reset_combo()
@@ -65,11 +70,13 @@ func hit_by_police():
 	if level.shield:
 		level.disable_shield()
 	else:
+		Global.latest_arcade_score = int(level.length_played_in_kilometers * 1000)
+		is_fine = false
 		was_hit_by_police = true
 		call_deferred("disable_collisions")
 		$Hit.play()
 		$Sprite/AnimationPlayer.play("crash")
-		rotation_degrees = -15
+		rotation_degrees = -15 * Global.mirror_factor
 		velocity = Vector2(-230 * Global.mirror_factor, -250)
 		yield(get_tree().create_timer(0.4), "timeout")
 		z_index = -1

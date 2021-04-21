@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/font.png" type="Texture" id=1]
+[ext_resource path="res://scenes/7DigitNumber.gd" type="Script" id=2]
+
+[node name="SevenDigitNumber" type="Sprite"]
+script = ExtResource( 2 )
+
+[node name="Figure_1" type="Sprite" parent="."]
+position = Vector2( -88, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_2" type="Sprite" parent="."]
+position = Vector2( -76, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_3" type="Sprite" parent="."]
+position = Vector2( -59, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_4" type="Sprite" parent="."]
+position = Vector2( -47, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_5" type="Sprite" parent="."]
+position = Vector2( -35, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_6" type="Sprite" parent="."]
+position = Vector2( -22, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 11
+
+[node name="Figure_7" type="Sprite" parent="."]
+position = Vector2( -17, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="Figure_8" type="Sprite" parent="."]
+position = Vector2( -5, 0 )
+texture = ExtResource( 1 )
+hframes = 12
+frame = 9
